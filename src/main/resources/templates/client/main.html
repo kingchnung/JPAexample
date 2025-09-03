@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      class="h-100" data-bs-theme="auto">
+<head>
+    <th:block th:insert="~{template/client/fragments/block :: config}"></th:block>
+    <meta name="theme-color" content="#712cf9"/>
+    <link href="/css/cover.css" rel="stylesheet">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sticky-footer-navbar/"/>
+</head>
+<body class="d-flex flex-column h-100 text-center text-bg-dark">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <!--    <header class="mb-auto">-->
+    <!--        <div>-->
+    <!--            <h3 class="float-md-start mb-0">Cover</h3>-->
+    <!--            <nav class="nav nav-masthead justify-content-center float-md-end">-->
+    <!--                <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>-->
+    <!--                <a class="nav-link fw-bold py-1 px-0" href="#">Features</a>-->
+    <!--                <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>-->
+    <!--            </nav>-->
+    <!--        </div>-->
+    <!--    </header>-->
+    <header class="mb-auto">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <th:block th:insert="~{template/client/fragments/block :: header}"></th:block>
+        </nav>
+    </header>
+    <main class="px-3">
+        <h1>3행시 놀이</h1> <br/>
+        <p class="lead">고:고추는</p>
+        <p class="lead">통:으로 말려서 고춧가루를 만들지요</p><br/>
+        <p class="lead">초:생강에</p>
+        <p class="lead">토:마토를 곁들여 먹으면</p>
+        <p class="lead">화:가 나네</p><br/>
+        <p class="lead">커: 커지는 싸움속에서</p>
+        <p class="lead">피: 피를 보지않으려면</p>
+        <p class="lead">콩: (콩 한알을 먹으며) 콩!</p>
+        <img src="data:image/jpeg;base64,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">
+        <p class="lead">
+            <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">두과자</a>
+        </p>
+        <br/>
+    </main>
+    <footer class="mt-auto text-white-50">
+        <P>우리가 만든 첫 삼행시</P>
+    </footer>
+</div>
+</body>
+</html>
