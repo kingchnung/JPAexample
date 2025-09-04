@@ -4,7 +4,7 @@ document.getElementById("boardInsertBtn").addEventListener("click", () => {
     else if(!chkData("#boardContent", "내용을")) return;
     else if(!chkData("#boardPasswd", "비밀번호를")) return;
     else {
-        formSubmit("insertForm", "post", "/board/boardInsert");
+        formSubmit("#insertForm", "post", "/board/boardInsert");
     }
 });
 

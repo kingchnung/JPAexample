@@ -52,7 +52,8 @@
             <th:block th:if="${not #strings.isEmpty(boardList)}">
                 <tr class="text-center" th:data-num="*{no}" th:each="board : ${boardList}" th:object="${board}">
                     <td th:text="*{no}"></td>
-                    <td class="text-start goDetail" th:text="*{title}"></td>
+                    <td><a style="text-decoration: none; color: gray; font-weight: bold;"
+                           th:href="@{/board/} + *{no}" class="goDetail"  th:text="*{title}" /></td>
                     <td class="name text-center" th:text="*{name}"></td>
                     <td th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                     <td th:text="*{hit}"></td>

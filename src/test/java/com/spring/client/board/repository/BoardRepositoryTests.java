@@ -65,7 +65,7 @@ public class BoardRepositoryTests {
     }
 
     @Test
-    public void boardCountTest(){
+    public void boardCountTest() {
         long boardCount = boardRepository.count();
         log.info("레코드 수 : {}", boardCount);
     }
@@ -114,4 +114,25 @@ public class BoardRepositoryTests {
         Optional<Board> boardOptional = boardRepository.findById(9L);
         assertFalse(boardOptional.isPresent());
     }
+
+    @Test
+    public void findByTitleContainingTest() {
+//        Board titleSearch = boardRepository.findByTitle("노력 명언");
+//        log.info(titleSearch.toString());
+
+        // 제목검색
+//        List<Board> list = boardRepository.findByTitleContaining("끈기");
+        // 이름검색
+        //List<Board> list = boardRepository.findByNameContaining("한봄");
+        // 내용검색
+        //List<Board> list = boardRepository.findByContentContaining("소망");
+
+        // 등록일검색
+//    log.info(LocalDateTime.now().minusDays(2).toString());
+//    log.info(LocalDateTime.now().toString());
+    List<Board> list = boardRepository.findByRegDateBetween(LocalDateTime.now().minusDays(2), LocalDateTime.now());
+
+        list.forEach(board -> log.info(board.toString()));
+    }
 }
+

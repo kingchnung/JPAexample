@@ -58,10 +58,10 @@ document.getElementById("insertFormBtn").addEventListener("click", () => {
 // 초기 실행
 //searchKeyword();
 
-document.querySelectorAll(".goDetail").forEach(function (element) {
-    element.addEventListener("click", function () {
-        const tr = this.closest("tr");
-        const no = tr.dataset.no;
-        locationProcess(`/board/${no}`);
-    });
+//document.querySelectorAll(".goDetail").forEach(function (element) {
+//    element.addEventListener("click", function () {
+//        const tr = this.closest("tr");
+//        const no = tr.dataset.no;
+//        locationProcess(`/board/${no}`);
+//    });
 });
