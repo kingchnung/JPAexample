@@ -38,6 +38,7 @@ dependencies {
 	// 테스트 코드에서 Lombok 사용 시
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
+	implementation "net.coobird:thumbnailator:0.4.20"
 }
 
 tasks.named('test') {

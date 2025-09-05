@@ -9,6 +9,12 @@
 
 <th:block layout:fragment="content">
     <h2 class="text-center">게시판 리스트</h2>
+    <div id="boardSearch" class="my-2">
+        <form id="searchForm">
+            <input type="hidden" name="page" id="page" th:value="${boardList.pageRequestDTO.page}">
+            <input type="hidden" name="size" id="size" th:value="${boardList.pageRequestDTO.size}">
+        </form>
+    </div>
     <!--    <div id="boardSearch" class="my-2">-->
     <!--        <form id="searchForm">-->
     <!--            <div class="row g-2 align-items-center">-->
@@ -36,26 +42,28 @@
         <table class="table table-striped table-hover">
             <thead>
             <tr class="text-center">
-                <th scope="col-md-2">글번호</th>
-                <th scope="col-md-4">글제목</th>
-                <th scope="col-md-2">작성자</th>
-                <th scope="col-md-3">등록일</th>
-                <th scope="col-md-1">조회수</th>
+                <th class="col-md-2">이미지</th>
+                <th class="col-md-1">글번호</th>
+                <th class="col-md-3">글제목</th>
+                <th class="col-md-2">작성자</th>
+                <th class="col-md-3">등록일</th>
+                <th class="col-md-1">조회수</th>
             </tr>
             </thead>
             <tbody class="list">
             <!-- #lists , #sets , #maps : 컬렉션 관련 기능 제공 -->
-            <tr th:if="${#lists.size(boardList) == 0}">
-                <td colspan="5">등록된 게시물이 존재하지 않습니다.</td>
+            <tr th:if="${#lists.size(boardList.dtoList) == 0}">
+                <td colspan="6">등록된 게시물이 존재하지 않습니다.</td>
             </tr>
             <!--/* Strings 객체의 유틸리티 메서드는  #strings다.  ex) ${#strings.method(string)} */-->
-            <th:block th:if="${not #strings.isEmpty(boardList)}">
-                <tr class="text-center" th:data-num="*{no}" th:each="board : ${boardList}" th:object="${board}">
+            <th:block th:if="${not #strings.isEmpty(boardList.dtoList)}">
+                <tr class="text-center" th:data-no="*{no}" th:each="board : ${boardList.dtoList}" th:object="${board}">
+                    <td><img th:src="@{/board/view/} + *{'s_'+filename}" /></td>
                     <td th:text="*{no}"></td>
                     <td><a style="text-decoration: none; color: gray; font-weight: bold;"
                            th:href="@{/board/} + *{no}" class="goDetail"  th:text="*{title}" /></td>
-                    <td class="name text-center" th:text="*{name}"></td>
-                    <td th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td class="name" th:text="*{name}"></td>
+                    <td class="date" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                     <td th:text="*{hit}"></td>
                 </tr>
             </th:block>
@@ -65,6 +73,24 @@
     <div class="text-end">
         <button class="btn btn-primary btn-sm mb-2" id="insertFormBtn" type="button">글쓰기</button>
     </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <!--/* 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인. */-->
+            <li class="page-item" th:if="${boardList.prev}">
+                <a th:data-number="${boardList.prevPage}" class="page-link">Previous</a>
+            </li>
+
+            <!--/* 바로가기 번호 출력 */-->
+            <li th:each="number : ${boardList.pageNumList}" th:classappend="'page-item ' + ${(boardList.current == number) ? 'active' : ''}">
+                <a class="page-link" th:text="${number}" th:data-number="${number}"></a>
+            </li>
+
+            <!--/* 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인. */-->
+            <li class="page-item" th:if="${boardList.next}">
+                <a th:data-number="${boardList.nextPage}" class="page-link">Next</a>
+            </li>
+        </ul>
+    </nav>
 </th:block>
 
 <th:block layout:fragment="script">

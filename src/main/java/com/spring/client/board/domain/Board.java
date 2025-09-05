@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -35,12 +36,24 @@ public class Board {
     @Column(nullable = false)
     private String content;
 
-//  엔티티가 생성되거나 업데이트 되는 시점의 날짜 데이터를 기록하는 설정
+    //  엔티티가 생성되거나 업데이트 되는 시점의 날짜 데이터를 기록하는 설정
     @CreationTimestamp
     @ColumnDefault(value = "sysdate")
     private LocalDateTime regDate;
 
-//  객체 타입(Integer)을 사용하는 이유는 null을 리턴할 수 있기 때문.
+    //  객체 타입(Integer)을 사용하는 이유는 null을 리턴할 수 있기 때문.
     @ColumnDefault(value = "0")
     private Integer hit = 0;
+
+    // @Transient: 컬럼과 매핑하지 않을 때 사용. 필드로만 사용하고자 할 때
+    // jakarta.persistence.Transient로 임포트해야 함.
+    // org.springframework.web.multipart.MultipartFile로 임포트해야 함.
+    @Transient
+    private MultipartFile file; //파일 업로드를 위한 필드
+
+    @Column
+    private String filename = ""; //실제 서버에 저장할 파일명
+
+//    @Column
+//    private String thumbname = ""; //실제 서버에 저장할 썸네일 이미지 파일명
 }

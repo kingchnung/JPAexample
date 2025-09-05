@@ -2,6 +2,16 @@ document.getElementById("insertFormBtn").addEventListener("click", () => {
     locationProcess("/board/insertForm");
 });
 
+/* 페이징 처리 */
+document.querySelectorAll(".page-item a").forEach(function(anchor) {
+    anchor.addEventListener("click", function(e) {
+        e.preventDefault();
+        const pageNumber = this.dataset.number;
+        document.getElementById("page").value = pageNumber;
+        formSubmit("searchForm", "get", "/board/boardList");
+    });
+});
+
 //document.addEventListener('click', (e) => {
 //    const target = e.target.closest('.goDetail');
 //    if(!target) return;
@@ -64,4 +74,4 @@ document.getElementById("insertFormBtn").addEventListener("click", () => {
 //        const no = tr.dataset.no;
 //        locationProcess(`/board/${no}`);
 //    });
-});
+//});

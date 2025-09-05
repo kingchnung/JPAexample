@@ -134,5 +134,16 @@ public class BoardRepositoryTests {
 
         list.forEach(board -> log.info(board.toString()));
     }
+
+    @Test
+    public void boardAllInsertTest() {
+        for(int i = 1; i <= 100; i++) {
+            Board board = new Board();
+            board.setTitle("Title..." + i);
+            board.setName("홍길동" + i);
+            board.setContent("실패한 자가 패배하는 것이 아니라 포기한 자가 패배하는 것이다.");
+            boardRepository.save(board);
+        }
+    }
 }
 
